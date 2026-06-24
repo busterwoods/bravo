@@ -1,0 +1,178 @@
+/* final.css
+   Custom styles for final.html layout and wireframe draft.
+   Follows Google CSS Style Guide conventions.
+*/
+
+.final-page__content {
+  max-width: 1200px;
+}
+
+.final-header {
+  gap: 1rem;
+}
+
+.final-header__brand {
+  font-weight: 600;
+}
+
+.final-header__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 0.75rem;
+}
+
+.final-hero {
+  min-height: 650px;
+  border-radius: 1.5rem;
+}
+
+.final-hero__body {
+  padding: 3rem;
+}
+
+.final-hero__label {
+  color: #6c757d;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.final-hero__heading {
+  font-weight: 700;
+}
+
+.final-hero__button-wrap {
+  min-height: 420px;
+}
+
+.big-button {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 2px solid #dee2e6;
+  background-color: #ffffff;
+  color: #212529;
+  font-size: 3rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+.big-button__icon {
+  line-height: 1;
+}
+
+.final-stats .final-stat {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #e9ecef;
+}
+
+.final-stat__label {
+  color: #6c757d;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.final-stat__value {
+  margin-top: 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.upgrade-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100%;
+}
+
+.upgrade-panel__scroll {
+  flex: 1 1 auto;
+  max-height: 72vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.upgrade-panel__scroll::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+.upgrade-panel__scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+}
+
+.upgrade-panel__scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.upgrade-panel__icon {
+  font-size: 1.5rem;
+}
+
+.upgrade-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  overflow-x: auto;
+}
+
+.upgrade-tabs .nav-link {
+  white-space: nowrap;
+  padding: 0.5rem 0.75rem;
+}
+
+.upgrade-tabs .nav-item {
+  flex: 1 1 auto;
+}
+
+.upgrade-card {
+  padding: 1rem;
+  border-radius: 1.25rem;
+}
+
+.upgrade-card__body {
+  margin-bottom: 1rem;
+}
+
+.upgrade-card__icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.upgrade-card__title {
+  font-weight: 600;
+}
+
+.upgrade-card__text {
+  color: #6c757d;
+}
+
+.upgrade-card--final {
+  background-color: #fff8db;
+  border-color: #f7e29c;
+}
+
+.upgradeButton {
+  width: 100%;
+  font-weight: 600;
+}
+
+@media (max-width: 991.98px) {
+  .final-hero__button-wrap {
+    min-height: 300px;
+  }
+}

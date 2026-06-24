@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Normalize -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/final.css">
+
+  <title>bravo project</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <header class="bg-dark text-white p-3 text-center">
+    <a href="../index.html" class="text-white">Go To Home</a>
+    <a href="final.html" class="text-white">Go To Final Game</a>
+  </header>
+
+  <main class="flex-fill">
+    <div class="container py-5 final-page__content">
+      <div class="row g-4 align-items-stretch">
+        <section class="col-lg-8">
+          <div class="card final-hero shadow-sm">
+            <div class="card-body final-hero__body">
+              <div class="final-hero__intro text-center mb-4">
+                <div class="final-hero__label">Main Clicker</div>
+                <h1 class="h3 final-hero__heading">Build your code score</h1>
+              </div>
+
+              <div class="final-hero__button-wrap d-flex justify-content-center mb-4">
+                <button type="button" id="bigButton" class="btn big-button" aria-label="Main click button">
+                  <span class="big-button__icon">&lt;/&gt;</span>
+                </button>
+              </div>
+
+              <div class="final-stats">
+                <div class="row g-3">
+                  <div class="col-sm-4">
+                    <div class="final-stat card">
+                      <div class="final-stat__label">Clicks</div>
+                      <div id="lineCount" class="final-stat__value">0</div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="final-stat card">
+                      <div class="final-stat__label">Clicks / sec</div>
+                      <div id="clicksPerSecond" class="final-stat__value">0</div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="final-stat card">
+                      <div class="final-stat__label">Total clicks</div>
+                      <div id="totalClicks" class="final-stat__value">0</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="col-lg-4">
+          <div class="upgrade-panel">
+            <div class="upgrade-panel__header mb-3 d-flex align-items-center justify-content-between">
+              <div>
+                <h2 class="h5 mb-1">Upgrades</h2>
+                <p class="mb-0 text-muted">Boost your click power</p>
+              </div>
+              <i class="bi bi-gear-fill upgrade-panel__icon"></i>
+            </div>
+
+            <ul class="nav nav-tabs upgrade-tabs mb-3" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab-languages" data-bs-toggle="tab"
+                  data-bs-target="#tabPaneLanguages" type="button" role="tab" aria-controls="tabPaneLanguages"
+                  aria-selected="true">Languages</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-algorithms" data-bs-toggle="tab" data-bs-target="#tabPaneAlgorithms"
+                  type="button" role="tab" aria-controls="tabPaneAlgorithms" aria-selected="false">Algorithms</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-data-structures" data-bs-toggle="tab"
+                  data-bs-target="#tabPaneDataStructures" type="button" role="tab" aria-controls="tabPaneDataStructures"
+                  aria-selected="false">Data Structures</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-frameworks" data-bs-toggle="tab" data-bs-target="#tabPaneFrameworks"
+                  type="button" role="tab" aria-controls="tabPaneFrameworks" aria-selected="false">Frameworks</button>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="tabPaneLanguages" role="tabpanel"
+                aria-labelledby="tab-languages">
+                <!-- Languages tab: current upgrade cards -->
+                <div class="upgrade-panel__scroll">
+                  <div class="upgrade-list d-grid gap-3">
+
+                    <!-- Click Upgrade Card 1 -->
+                    <article class="upgrade-card card">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-arrow-up-right-circle"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Upgrade 1</h3>
+                          <p class="upgrade-card__text mb-0">Add +1 click per press.</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="upgrade-one-count" class="text-muted">Owned: 0</small>
+                            <small id="upgrade-one-value" class="text-muted">+0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="upgrade-one" class="btn btn-outline-primary upgradeButton">100</button>
+                    </article>
+
+                    <!-- Click Upgrade Card 2 -->
+                    <article class="upgrade-card card">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Upgrade 2</h3>
+                          <p class="upgrade-card__text mb-0">Add +3 clicks per press.</p>
+                        </div>
+                      </div>
+                      <button type="button" id="upgrade-two" class="btn btn-outline-primary upgradeButton">300</button>
+                    </article>
+
+
+
+                    <article class="upgrade-card card upgrade-card--final">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-warning text-dark">
+                          <i class="bi bi-trophy-fill"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Finish</h3>
+                          <p class="upgrade-card__text mb-0">Claim your final reward.</p>
+                        </div>
+                      </div>
+                      <button type="button" id="win" class="btn btn-outline-dark upgradeButton">10000</button>
+                    </article>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tabPaneAlgorithms" role="tabpanel" aria-labelledby="tab-algorithms">
+                <!-- Algorithms tab: empty for now -->
+                <div class="upgrade-panel__scroll">
+                  <div class="upgrade-list d-grid gap-3">
+
+                    <!-- Automation Upgrade Card 1 -->
+                    <article class="upgrade-card card">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-clock-history"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Automation</h3>
+                          <p class="upgrade-card__text mb-0">Earn clicks automatically.</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="automation-one-count" class="text-muted">Owned: 0</small>
+                            <small id="automation-one-value" class="text-muted">+0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="automation-one" class="btn btn-outline-primary upgradeButton">100</button>
+                    </article>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="tabPaneDataStructures" role="tabpanel"
+                aria-labelledby="tab-data-structures">
+                <!-- Data Structures tab: empty for now -->
+                <div class="upgrade-panel__empty text-muted">No upgrades available yet.</div>
+              </div>
+
+              <div class="tab-pane fade" id="tabPaneFrameworks" role="tabpanel" aria-labelledby="tab-frameworks">
+                <!-- Frameworks-->
+                <div class="upgrade-panel__scroll">
+                  <div class="upgrade-list d-grid gap-3">
+
+                    <!-- Framework Upgrade Card 1 -->
+                    <article class="upgrade-card card framework-upgrade">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-coin"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Framework Upgrade 1</h3>
+                          <p class="upgrade-card__text mb-0">Increase multiplier.</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="upgrade-three-count" class="text-muted">Owned: 0</small>
+                            <small id="upgrade-three-value" class="text-muted">x0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="upgrade-three" class="btn btn-outline-primary upgradeButton">500</button>
+                    </article>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center py-4 mt-auto">
+    <a href="https://busterwoods.github.io/bravo/">home</a> |
+    <a href="https://github.com/busterwoods" target="_blank">Github</a> |
+    <a href="https://github.com/busterwoods/bravo" target="_blank">Repo</a> |
+    <a href="https://linkedin.com/in/troy-woods-42b1b1338" target="_blank">LinkedIn</a>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js"
+    integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+
+  <!-- jQuery UI -->
+  <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.min.js"
+    integrity="sha256-mblSWfbYzaq/f+4akyMhE6XELCou4jbkgPv+JQPER2M=" crossorigin="anonymous"></script>
+
+  <!-- Custom JS -->
+  <script src="../assets/js/final.js"></script>
+</body>
+
+</html>
