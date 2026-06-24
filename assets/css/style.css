@@ -1,10 +1,16 @@
+#bigButton {
+  height: 400px;
+  width: 400px;
+}
 
-#bigButton  {
-  height:400px;
-  width:400px;
-};
+;
 
 .upgradeButton {
-  width:100px;
-  height:100px;
+  width: 100px;
+  height: 100px;
+}
+
+#win {
+  background-color: gold;
+  color: black;
 }

@@ -18,46 +18,41 @@
   <title>bravo project</title>
 </head>
 
-<body>
-  
-  <div id="game" class="container">
+<body class="d-flex flex-column min-vh-100">
+
+  <header class="bg-dark text-white p-3 text-center">
+    <a href="pages/concept.html" class="text-white">Go To Concept Game</a>
+    <a href="pages/final.html" class="text-white">Go To Final Game</a>
+  </header>
+
+  <main class="flex-fill">
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <h1>Welcome to my web game</h1>
         <label for="playerName">Enter your name:</label>
         <input id="playerName">
-
-        <p id="greetPlayer"></p>
-        <p>Lines of Code: <span id="lineCount">0</span></p>
-      </div>
-  </div>
-
-  <div class="container py-4">
-    <div class="row">
-      <div class="col bg-light p-3 border">
-        <button type="button" id="bigButton">Click Me</button>
-      </div>
-      <div class="col bg-secondary text-white p-3 border">
-        <button type="button" id="upgrade-one" class="btn btn-primary upgradeButton">Upgrade 1: 100</button><br>
-        <button type="button" id="upgrade-two" class="btn btn-primary upgradeButton">Upgrade 2: 300</button><br>
-        <button type="button" id="upgrade-three" class="btn btn-primary upgradeButton">Upgrade 3: 500</button>
-        <button type="button" id="automation-one" class="btn btn-primary upgradeButton">Automation 1: 100</button>
+        <p id="greetPlayer">Hello, Guest!</p>
       </div>
     </div>
-  </div>
+  </main>
 
-
-  
-
+  <footer class="text-center py-4 mt-auto">
+    <a href="https://busterwoods.github.io/bravo/">home</a> |
+    <a href="https://github.com/busterwoods" target="_blank">Github</a> |
+    <a href="https://github.com/busterwoods/bravo" target="_blank">Repo</a> |
+    <a href="https://linkedin.com/in/troy-woods-42b1b1338" target="_blank">LinkedIn</a> |
+  </footer>
 
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js"
+    integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
 
   <!-- jQuery UI -->
-  <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.min.js" integrity="sha256-mblSWfbYzaq/f+4akyMhE6XELCou4jbkgPv+JQPER2M=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.min.js"
+    integrity="sha256-mblSWfbYzaq/f+4akyMhE6XELCou4jbkgPv+JQPER2M=" crossorigin="anonymous"></script>
 
   <!-- Custom JS -->
   <script src="assets/js/main.js"></script>
