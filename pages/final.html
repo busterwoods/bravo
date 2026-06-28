@@ -61,19 +61,25 @@
 
               <div class="final-stats">
                 <div class="row g-3">
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
                     <div class="final-stat card">
                       <div class="final-stat__label">Lines of Code</div>
                       <div id="lineCount" class="final-stat__value">0</div>
                     </div>
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
+                    <div class="final-stat card">
+                      <div class="final-stat__label">Lines / click</div>
+                      <div id="linesPerClick" class="final-stat__value">0</div>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
                     <div class="final-stat card">
                       <div class="final-stat__label">Lines / sec</div>
                       <div id="linesPerSecond" class="final-stat__value">0</div>
                     </div>
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
                     <div class="final-stat card">
                       <div class="final-stat__label">Total lines</div>
                       <div id="totalLines" class="final-stat__value">0</div>
@@ -93,6 +99,15 @@
                 <p class="mb-0 text-muted">Boost your coding ability</p>
               </div>
               <i class="bi bi-gear-fill upgrade-panel__icon"></i>
+            </div>
+
+            <div class="bulk-purchase-controls mb-3">
+              <div class="btn-group w-100" role="group" aria-label="Bulk purchase multiplier">
+                <button type="button" class="btn btn-outline-primary active bulk-purchase-toggle" data-multiplier="1">1x</button>
+                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle" data-multiplier="10">10x</button>
+                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle" data-multiplier="100">100x</button>
+                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle" data-multiplier="max">MAX</button>
+              </div>
             </div>
 
             <ul class="nav nav-tabs upgrade-tabs mb-3" role="tablist">
@@ -155,20 +170,48 @@
                       <button type="button" id="upgrade-two" class="btn btn-outline-primary upgradeButton">300</button>
                     </article>
 
-
-
-                    <article class="upgrade-card card upgrade-card--final">
+                    <!-- Click Upgrade Card 3 -->
+                    <article class="upgrade-card card">
                       <div class="upgrade-card__body d-flex align-items-start gap-3">
-                        <div class="upgrade-card__icon bg-warning text-dark">
-                          <i class="bi bi-trophy-fill"></i>
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-speedometer2"></i>
                         </div>
                         <div>
-                          <h3 class="upgrade-card__title h6 mb-1">Finish</h3>
-                          <p class="upgrade-card__text mb-0">Claim your final reward.</p>
+                          <h3 class="upgrade-card__title h6 mb-1">Python</h3>
+                          <p class="upgrade-card__text mb-0">+6 lines of code per click.</p>
                         </div>
                       </div>
-                      <button type="button" id="win" class="btn btn-outline-dark upgradeButton">10000</button>
+                      <button type="button" id="upgrade-three" class="btn btn-outline-primary upgradeButton">500</button>
                     </article>
+
+                    <!-- Click Upgrade Card 4 -->
+                    <article class="upgrade-card card">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Java</h3>
+                          <p class="upgrade-card__text mb-0">+12 lines of code per click.</p>
+                        </div>
+                      </div>
+                      <button type="button" id="upgrade-four" class="btn btn-outline-primary upgradeButton">1000</button>
+                    </article>
+
+                    <!-- Click Upgrade Card 5 -->
+                    <article class="upgrade-card card">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">C#</h3>
+                          <p class="upgrade-card__text mb-0">+20 lines of code per click.</p>
+                        </div>
+                      </div>
+                      <button type="button" id="upgrade-five" class="btn btn-outline-primary upgradeButton">1750</button>
+                    </article>
+
                   </div>
                 </div>
               </div>
@@ -186,7 +229,7 @@
                         </div>
                         <div>
                           <h3 class="upgrade-card__title h6 mb-1">Linear Search</h3>
-                          <p class="upgrade-card__text mb-0">Begin automation with 1 line per second</p>
+                          <p class="upgrade-card__text mb-0">++1 line per second</p>
                           <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
                             <small id="automation-one-count" class="text-muted">Owned: 0</small>
                             <small id="automation-one-value" class="text-muted">+0</small>
@@ -195,6 +238,44 @@
                       </div>
                       <button type="button" id="automation-one"
                         class="btn btn-outline-primary upgradeButton">100</button>
+                    </article>
+
+                    <!-- Automation Upgrade Card 2 -->
+                    <article class="upgrade-card card">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-clock-history"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Binary Search</h3>
+                          <p class="upgrade-card__text mb-0">+9 line per second</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="automation-two-count" class="text-muted">Owned: 0</small>
+                            <small id="automation-two-value" class="text-muted">+0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="automation-two"
+                        class="btn btn-outline-primary upgradeButton">1000</button>
+                    </article>
+
+                    <!-- Automation Upgrade Card 3 -->
+                    <article class="upgrade-card card">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-clock-history"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Bubble Sort</h3>
+                          <p class="upgrade-card__text mb-0">+42 line per second</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="automation-three-count" class="text-muted">Owned: 0</small>
+                            <small id="automation-three-value" class="text-muted">+0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="automation-three"
+                        class="btn btn-outline-primary upgradeButton">5200</button>
                     </article>
 
                   </div>
@@ -223,6 +304,43 @@
                       </div>
                       <button type="button" id="data-one" class="btn btn-outline-primary upgradeButton">10000</button>
                     </article>
+
+                    <!-- Data Structure Upgrade Card 2 -->
+                    <article class="upgrade-card card framework-upgrade">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-coin"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Linked Lists</h3>
+                          <p class="upgrade-card__text mb-0">Raise all clicking production to the power of 2</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="data-two-count" class="text-muted">Owned: 0</small>
+                            <small id="data-two-value" class="text-muted">^0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="data-two" class="btn btn-outline-primary upgradeButton">50000</button>
+                    </article>
+
+                    <!-- Data Structure Upgrade Card 3 -->
+                    <article class="upgrade-card card framework-upgrade">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-coin"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">Stack</h3>
+                          <p class="upgrade-card__text mb-0">Raise all Automatic production to the power of 2</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="data-three-count" class="text-muted">Owned: 0</small>
+                            <small id="data-three-value" class="text-muted">^0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="data-three" class="btn btn-outline-primary upgradeButton">75000</button>
+                    </article>
+
                   </div>
                 </div>
               </div>
@@ -249,6 +367,44 @@
                       </div>
                       <button type="button" id="framework-one"
                         class="btn btn-outline-primary upgradeButton">500</button>
+                    </article>
+
+                    <!-- Framework Upgrade Card 2 -->
+                    <article class="upgrade-card card framework-upgrade">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-coin"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">React</h3>
+                          <p class="upgrade-card__text mb-0">Triple your lines per second.</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="framework-two-count" class="text-muted">Owned: 0</small>
+                            <small id="framework-two-value" class="text-muted">x0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="framework-two"
+                        class="btn btn-outline-primary upgradeButton">1000</button>
+                    </article>
+
+                    <!-- Framework Upgrade Card 3 -->
+                    <article class="upgrade-card card framework-upgrade">
+                      <div class="upgrade-card__body d-flex align-items-start gap-3">
+                        <div class="upgrade-card__icon bg-light text-primary">
+                          <i class="bi bi-coin"></i>
+                        </div>
+                        <div>
+                          <h3 class="upgrade-card__title h6 mb-1">React</h3>
+                          <p class="upgrade-card__text mb-0">Quintuple your lines per click.</p>
+                          <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
+                            <small id="framework-three-count" class="text-muted">Owned: 0</small>
+                            <small id="framework-three-value" class="text-muted">x0</small>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" id="framework-three"
+                        class="btn btn-outline-primary upgradeButton">1500</button>
                     </article>
 
                   </div>
