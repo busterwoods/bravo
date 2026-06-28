@@ -20,10 +20,24 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-  <header class="bg-dark text-white p-3 text-center">
-    <a href="../index.html" class="text-white">Go To Home</a>
-    <a href="final.html" class="text-white">Go To Final Game</a>
-  </header>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><i class="bi bi-keyboard me-2"> Code Clicker</i></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="concept.html">Concept Game</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="final.html">Final Game</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <div id="game" class="container">
     <p>Lines of Code: <span id="lineCount">0</span></p>
