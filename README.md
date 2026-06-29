@@ -2,7 +2,7 @@
 > Click Your Way to Coding Mastery!
 
 ## Authorship
-- Troy Woods, [Github Profile](https://github.com/busterwoods), 06/24/2026, Version 0.2
+- Troy Woods, [Github Profile](https://github.com/busterwoods), 06/29/2026, Version 0.3
 
 ## User Story 
 - **as a** Bored individual viewing this repository 
@@ -73,3 +73,9 @@ $('#bigButton').on('click', () => {
 To increase the user's score
 
 ### validation & accessibilty
+- [Google Lighthouse](https://pagespeed.web.dev/analysis/https-busterwoods-github-io-bravo-pages-final-html/cwgrmikqbw?form_factor=desktop)
+
+### Sprint 99
+- [Prestige System](https://github.com/busterwoods/bravo/issues/2)
+- [Improving Upgrades](https://github.com/busterwoods/bravo/issues/3)
+- [Saving Progress](https://github.com/busterwoods/bravo/issues/4)
