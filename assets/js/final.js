@@ -9,6 +9,76 @@ let clicksExponentMan = 1;
 let clicksExponentAuto = 1;
 let purchaseMultiplier = 1;
 
+/* ========================================
+   ACHIEVEMENTS SYSTEM
+   ========================================
+   Easy-to-extend achievement definitions.
+   
+   TO ADD NEW ACHIEVEMENTS:
+   1. Add new object to achievementsList array
+   2. Define: id, title, description, icon, checkCondition
+   3. checkCondition should return true/false
+   4. Rendering is automatic
+   5. States handled by CSS classes: locked, completed
+   
+   EXAMPLE:
+   {
+     id: 'first-click',
+     title: 'First Step',
+     description: 'Make your first click',
+     icon: 'bi-hand-index',
+     checkCondition: () => clicks >= 1
+   }
+*/
+
+const achievementsList = [
+  {
+    id: 'first-click',
+    title: 'First Step',
+    description: 'Make your first click',
+    icon: 'bi-hand-index',
+    checkCondition: () => clicks >= 1
+  },
+  {
+    id: 'hundred-clicks',
+    title: 'Century Club',
+    description: 'Reach 100 total clicks',
+    icon: 'bi-101-circle',
+    checkCondition: () => totalClicks >= 100
+  },
+  {
+    id: 'thousand-lines',
+    title: 'Kilolines',
+    description: 'Generate 1,000 lines of code',
+    icon: 'bi-lightning-fill',
+    checkCondition: () => clicks >= 1000
+  },
+  {
+    id: 'first-upgrade',
+    title: 'Self-Improvement',
+    description: 'Purchase your first upgrade',
+    icon: 'bi-arrow-up-circle',
+    checkCondition: () => Object.values(upgradeCounts).reduce((a, b) => a + b, 0) >= 1
+  },
+  {
+    id: 'automation',
+    title: 'Automation Master',
+    description: 'Unlock passive code generation',
+    icon: 'bi-robot',
+    checkCondition: () => clicksPerSecond > 0
+  },
+  {
+    id: 'million-lines',
+    title: 'Megalines',
+    description: 'Generate 1,000,000 lines of code',
+    icon: 'bi-speedometer2',
+    checkCondition: () => clicks >= 1000000
+  }
+];
+
+// Track which achievements have been displayed as completed
+const completedAchievements = new Set();
+
 const upgradeButtonSelectors = {
   upgradeOne: '#upgrade-one',
   upgradeTwo: '#upgrade-two',
@@ -205,11 +275,30 @@ function getBulkButtonText(upgradeKey) {
 }
 
 function updateScore() {
-  const perClickValue = (clickAdditive * clickMultiplier) * clicksExponentAll * clicksExponentMan;
-  const perSecondValue = clicksPerSecond * clicksPerSecondMultiplier * clicksExponentAll * clicksExponentAuto;
+  const perClickValue = (clickAdditive * clickMultiplier) ** (clicksExponentAll * clicksExponentMan);
+  const perSecondValue = clicksPerSecond * clicksPerSecondMultiplier ** (clicksExponentAll * clicksExponentAuto);
 
-  document.getElementById('totalLines').textContent = `${formatNumber(totalClicks)}`;
-  document.getElementById('lineCount').textContent = `${formatNumber(clicks)}`;
+  // Update button stats display (above the big button)
+  const totalLinesDisplay = document.getElementById('totalLinesDisplay');
+  const perSecondDisplay = document.getElementById('perSecondDisplay');
+  if (totalLinesDisplay) {
+    totalLinesDisplay.textContent = `${formatNumber(clicks)}`;
+  }
+  if (perSecondDisplay) {
+    perSecondDisplay.textContent = `${formatNumber(perSecondValue)}`;
+  }
+
+  // Update stats menu items
+  const lineCountElement = document.getElementById('lineCount');
+  if (lineCountElement) {
+    lineCountElement.textContent = `${formatNumber(clicks)}`;
+  }
+
+  const totalClicksElement = document.getElementById('totalClicks');
+  if (totalClicksElement) {
+    totalClicksElement.textContent = `${formatNumber(totalClicks)}`;
+  }
+
   const linesPerClickElement = document.getElementById('linesPerClick');
   const linesPerSecondElement = document.getElementById('linesPerSecond');
 
@@ -316,11 +405,15 @@ $(document).ready(() => {
   updateScore();
   updateUpgradeAvailability();
 
+  // Initialize achievements display
+  renderAchievements();
+
   setInterval(function () {
-    clicks += clicksPerSecond * clicksPerSecondMultiplier * clicksExponentAll * clicksExponentAuto;
-    totalClicks += clicksPerSecond * clicksPerSecondMultiplier * clicksExponentAll * clicksExponentAuto;
+    clicks += (clicksPerSecond * clicksPerSecondMultiplier) ** (clicksExponentAll * clicksExponentAuto);
+    totalClicks += (clicksPerSecond * clicksPerSecondMultiplier) ** (clicksExponentAll * clicksExponentAuto);
     updateScore();
     updateUpgradeAvailability();
+    updateAchievements();
   }, 1000);
 
   $('#playerName').on('keyup', function () {
@@ -328,10 +421,11 @@ $(document).ready(() => {
   });
 
   $('#bigButton').on('click', () => {
-    clicks += (clickAdditive * clickMultiplier) * clicksExponentAll * clicksExponentMan;
-    totalClicks += (clickAdditive * clickMultiplier) * clicksExponentAll * clicksExponentMan;
+    clicks += (clickAdditive * clickMultiplier) ** (clicksExponentAll * clicksExponentMan);
+    totalClicks += (clickAdditive * clickMultiplier) ** (clicksExponentAll * clicksExponentMan);
     updateScore();
     updateUpgradeAvailability();
+    updateAchievements();
   });
 
   $('.bulk-purchase-toggle').on('click', function () {
@@ -469,4 +563,73 @@ function echoInput(input, targetId) {
 
 function devMode() {
   clicks = 100000;
+}
+
+/* ========================================
+   ACHIEVEMENT SYSTEM FUNCTIONS
+   ========================================
+   Functions to manage achievement rendering
+   and state updates.
+*/
+
+/**
+ * Render all achievements to the achievements container
+ * Called once on page load to populate the achievement grid
+ */
+function renderAchievements() {
+  const container = document.getElementById('achievementsContainer');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  achievementsList.forEach(achievement => {
+    const isCompleted = achievement.checkCondition();
+
+    const achievementEl = document.createElement('div');
+    achievementEl.className = `achievement-item ${isCompleted ? 'completed' : 'locked'}`;
+    achievementEl.id = `achievement-${achievement.id}`;
+
+    achievementEl.innerHTML = `
+      <div class="achievement-item__header">
+        <div class="achievement-item__icon">
+          <i class="bi ${achievement.icon}"></i>
+        </div>
+        <div class="achievement-item__content">
+          <h4 class="achievement-item__title">${achievement.title}</h4>
+          <p class="achievement-item__description">${achievement.description}</p>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(achievementEl);
+  });
+}
+
+/**
+ * Update achievement states based on current game state
+ * Called frequently to check for newly completed achievements
+ */
+function updateAchievements() {
+  achievementsList.forEach(achievement => {
+    const isCompleted = achievement.checkCondition();
+    const achievementEl = document.getElementById(`achievement-${achievement.id}`);
+
+    if (!achievementEl) return;
+
+    if (isCompleted) {
+      // Achievement is now completed
+      if (!completedAchievements.has(achievement.id)) {
+        // First time this achievement is completed
+        completedAchievements.add(achievement.id);
+        achievementEl.classList.remove('locked');
+        achievementEl.classList.add('completed');
+      }
+    } else {
+      // Achievement is still locked
+      if (!achievementEl.classList.contains('locked')) {
+        achievementEl.classList.add('locked');
+        achievementEl.classList.remove('completed');
+      }
+    }
+  });
 }

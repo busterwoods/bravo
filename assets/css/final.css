@@ -1,91 +1,773 @@
 /* final.css
-   Custom styles for final.html layout and wireframe draft.
+   Code Clicker - Idle Game Styling
    Follows Google CSS Style Guide conventions.
+   
+   TABLE OF CONTENTS:
+   1. GLOBAL & BASE STYLES - Variables, colors, typography
+   2. LAYOUT STRUCTURE - Main page layout
+   3. HEADER / TITLE SECTION - Hero section styling
+   4. BIG BUTTON / CLICKABLE AREA - Main clicker button
+   5. BUTTON STATS DISPLAY - Stats shown above the button
+   6. STATS SECTION - Original stats cards (for reference)
+   7. COLLAPSIBLE STATS MENU - Expandable/collapsible stats menu
+   8. ACHIEVEMENTS SECTION - Achievement grid and items
+   9. SIDEBAR PANELS - General sidebar styling
+   10. UPGRADE PANEL - Right sidebar upgrade section
+   11. BULK PURCHASE CONTROLS - Purchase multiplier buttons
+   12. UPGRADE TABS - Tab navigation for upgrades
+   13. UPGRADE CARDS - Individual upgrade card styling
+   14. PRESTIGE SECTION - Prestige/reset system styling
+   15. RESPONSIVE DESIGN - Media queries
+   
+   HOW TO MODIFY:
+   - Colors: See :root variables at top
+   - New sections: Follow existing pattern with section headers
+   - Achievements: Update .achievement-item classes
+   - Stats menu: Update .stats-menu-* classes
 */
 
+/* ========== GLOBAL & BASE STYLES ========== */
+
+:root {
+  --color-primary: #0d6efd;
+  --color-primary-dark: #0b5ed7;
+  --color-bg-light: #f8f9fa;
+  --color-border: #dee2e6;
+  --color-text-muted: #6c757d;
+  --color-success: #198754;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 3rem;
+  --border-radius-sm: 0.5rem;
+  --border-radius-md: 1rem;
+  --border-radius-lg: 1.5rem;
+}
+
+body {
+  background-color: #ffffff;
+  color: #212529;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ========== LAYOUT STRUCTURE ========== */
+
 .final-page__content {
-  max-width: 1200px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-.final-header {
-  gap: 1rem;
+main {
+  flex: 1;
 }
 
-.final-header__brand {
-  font-weight: 600;
-}
-
-.final-header__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 0.75rem;
-}
+/* ========== HEADER / TITLE SECTION ========== */
 
 .final-hero {
-  min-height: 650px;
-  border-radius: 1.5rem;
+  display: block;
+  border-radius: var(--border-radius-lg);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .final-hero__body {
-  padding: 3rem;
+  padding: 2rem;
+}
+
+.final-hero__intro {
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .final-hero__label {
-  color: #6c757d;
-  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .final-hero__heading {
+  font-size: 2.5rem;
   font-weight: 700;
+  margin: 0;
+  color: #212529;
 }
 
+.final-hero__tagline {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* ========== BIG BUTTON / CLICKABLE AREA ========== */
+
 .final-hero__button-wrap {
-  min-height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  min-height: 350px;
+}
+
+/* ========== BUTTON STATS DISPLAY ========== */
+/* Displays total lines and lines per second above the main button */
+
+.button-stats-display {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.button-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button-stat__label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.button-stat__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
 }
 
 .big-button {
-  width: 320px;
-  height: 320px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
-  border: 2px solid #dee2e6;
+  border: 3px solid #dee2e6;
   background-color: #ffffff;
   color: #212529;
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.big-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  border-color: var(--color-primary);
+}
+
+.big-button:active {
+  transform: scale(0.98);
 }
 
 .big-button__icon {
   line-height: 1;
+  display: block;
 }
 
-.final-stats .final-stat {
-  padding: 1rem;
-  border-radius: 1rem;
-  border: 1px solid #e9ecef;
+.big-button__helper-text {
+  position: absolute;
+  bottom: -2rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  animation: pulse-text 2s infinite;
+}
+
+@keyframes pulse-text {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ========== STATS SECTION ========== */
+
+.final-stats {
+  margin-top: 2rem;
+}
+
+.final-stats .row {
+  gap: 1rem;
+}
+
+.final-stat {
+  padding: 1.25rem;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+  background-color: #f8f9fa;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.final-stat:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.1);
 }
 
 .final-stat__label {
-  color: #6c757d;
-  font-size: 0.875rem;
-  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
 }
 
 .final-stat__value {
-  margin-top: 0.75rem;
   font-size: 1.75rem;
   font-weight: 700;
+  color: #212529;
+  margin: 0;
 }
+
+/* ========== COLLAPSIBLE STATS MENU ========== */
+/* Menu that can be opened/closed to show game statistics
+   
+   STRUCTURE:
+   - stats-menu-wrapper: Container for toggle button and menu
+   - stats-menu-toggle: Button to show/hide stats menu
+   - stats-menu: Container for stat items
+   - stats-menu__item: Individual stat row (label | value)
+   
+   ADDING NEW STATS:
+   1. In HTML, add new .stats-menu__item in #statsMenuPanel
+   2. Include icon in .stats-menu__label with <i class="bi bi-..."></i>
+   3. Create element with unique id for JavaScript to update
+   4. CSS handles layout automatically
+   */
+
+.stats-menu-wrapper {
+  margin-top: 1.5rem;
+}
+
+.stats-menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.stats-menu-toggle__icon {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.stats-menu-toggle[aria-expanded="true"] .stats-menu-toggle__icon {
+  transform: rotate(180deg);
+}
+
+.stats-menu {
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+.stats-menu__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stats-menu__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.stats-menu__label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stats-menu__label i {
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.stats-menu__value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+/* ========== ACHIEVEMENTS SECTION ========== */
+/* Container for achievement items - easy to extend with new achievements
+   
+   ADDING NEW ACHIEVEMENTS:
+   1. Define in final.js achievementsList array with:
+      - id: unique identifier
+      - title: display name
+      - description: what to unlock it
+      - icon: Bootstrap icon class (e.g., 'bi-star')
+      - checkCondition: function to determine if unlocked
+   
+   2. Use classes:
+      - .achievement-item (base styling)
+      - .achievement-item.locked (faded, not earned)
+      - .achievement-item.completed (success styling)
+   
+   3. CSS automatically handles state styling - no manual HTML needed
+   */
+
+.achievements-wrapper {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--color-border);
+}
+
+.achievements-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #212529;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.achievements-title i {
+  color: var(--color-warning);
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Individual achievement item - easily styleable and extensible */
+.achievement-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius-md);
+  border: 2px solid var(--color-border);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.achievement-item:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.1);
+}
+
+/* Achievement locked state - appears faded */
+.achievement-item.locked {
+  opacity: 0.6;
+  background-color: #ffffff;
+}
+
+/* Achievement completed state - shows success styling */
+.achievement-item.completed {
+  border-color: var(--color-success);
+  background-color: #f0f9ff;
+}
+
+.achievement-item.completed .achievement-item__icon {
+  color: var(--color-success);
+}
+
+.achievement-item__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.achievement-item__icon {
+  font-size: 1.75rem;
+  min-width: 2rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  transition: color 0.3s ease;
+}
+
+.achievement-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-item__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0;
+  color: #212529;
+}
+
+.achievement-item__description {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0.25rem 0 0 0;
+}
+
+.achievement-item__progress {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ========== SIDEBAR PANELS ========== */
+
+.sidebar-panel {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar-panel__title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  color: #212529;
+}
+
+.sidebar-panel__icon {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+/* ========== STATS SIDEBAR ========== */
+
+.stats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.stat-item__label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.stat-item__icon {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+}
+
+.stat-item__value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+/* ========== ACHIEVEMENTS SECTION ========== */
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+}
+
+.achievement-item:hover {
+  background-color: #e7f1ff;
+  border-color: var(--color-primary);
+}
+
+.achievement-item.completed .achievement-item__icon {
+  color: var(--color-success);
+}
+
+.achievement-item.locked {
+  opacity: 0.5;
+}
+
+.achievement-item.locked .achievement-item__icon {
+  color: var(--color-text-muted);
+}
+
+.achievement-item__icon {
+  font-size: 1.5rem;
+  min-width: 2rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.achievement-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-item__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: #212529;
+}
+
+.achievement-item__description {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.achievement-item__progress {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ========== ALGORITHMS SECTION ========== */
+
+.algorithms-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.algorithm-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.algorithm-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+  transform: translateY(-2px);
+}
+
+.algorithm-card.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.algorithm-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.algorithm-card__icon {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.algorithm-card__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+  color: #212529;
+}
+
+.algorithm-card__description {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0.5rem 0 1rem 0;
+  flex-grow: 1;
+}
+
+.algorithm-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.algorithm-card__boost {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.algorithm-card__count {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* ========== PRESTIGE SECTION ========== */
+/* Located beneath the upgrade panel on the right sidebar
+   Used to reset progress and gain permanent bonuses
+   
+   STRUCTURE:
+   - prestige-panel: Main container with yellow/gold gradient
+   - prestige-panel__body: Inner padding
+   - prestige-content: Flex container for center alignment
+   - prestige-content__icon: Animated rotation icon
+   - prestige-button: Action button
+   
+   FUNCTIONALITY STATUS:
+   - Currently: Placeholder/UI only - no functionality implemented
+   - TODO: Add prestige logic in final.js
+   - TODO: Add transition animations
+   
+   STYLING:
+   - Uses orange/yellow theme (#ff9800, #ffc107)
+   - Rotating icon animation for visual interest
+   */
+
+.prestige-panel {
+  background: linear-gradient(135deg, #fff8db 0%, #fffacd 100%);
+  border: 2px solid #ffc107;
+  border-radius: var(--border-radius-lg);
+}
+
+.prestige-panel__body {
+  padding: 1.5rem;
+}
+
+.prestige-panel__icon {
+  color: #ff9800;
+}
+
+.prestige-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.prestige-content__icon {
+  font-size: 2.5rem;
+  color: #ff9800;
+  margin-bottom: 1rem;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.prestige-content__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #212529;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.prestige-content__description {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.prestige-content__knowledge {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ff9800;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  background-color: rgba(255, 152, 0, 0.1);
+  border-radius: var(--border-radius-sm);
+}
+
+.prestige-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #ff9800;
+  color: #ffffff;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.prestige-button:hover {
+  background-color: #f57c00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+/* ========== UPGRADE PANEL ========== */
 
 .upgrade-panel {
   display: flex;
@@ -94,85 +776,307 @@
   min-height: 100%;
 }
 
+.upgrade-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.upgrade-panel__title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  color: #212529;
+}
+
+.upgrade-panel__subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0.25rem 0 0 0;
+}
+
+.upgrade-panel__icon {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+/* ========== BULK PURCHASE CONTROLS ========== */
+
+.bulk-purchase-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.bulk-purchase-toggle {
+  padding: 0.6rem 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  background-color: #ffffff;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bulk-purchase-toggle:hover {
+  background-color: #e7f1ff;
+}
+
+.bulk-purchase-toggle.active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* ========== UPGRADE TABS ========== */
+
+.upgrade-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.upgrade-tabs .nav-link {
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.upgrade-tabs .nav-link:hover {
+  color: var(--color-primary);
+}
+
+.upgrade-tabs .nav-link.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* ========== UPGRADE CARDS ========== */
+
 .upgrade-panel__scroll {
   flex: 1 1 auto;
-  max-height: 72vh;
+  max-height: 500px;
   overflow-y: auto;
   padding-right: 0.5rem;
 }
 
 .upgrade-panel__scroll::-webkit-scrollbar {
-  width: 0.75rem;
+  width: 0.5rem;
 }
 
 .upgrade-panel__scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.15);
-  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
 }
 
 .upgrade-panel__scroll::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-.upgrade-panel__icon {
-  font-size: 1.5rem;
-}
-
-.upgrade-tabs {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0.25rem;
-  overflow-x: auto;
-}
-
-.upgrade-tabs .nav-link {
-  white-space: nowrap;
-  padding: 0.5rem 0.75rem;
-}
-
-.upgrade-tabs .nav-item {
-  flex: 1 1 auto;
+.upgrade-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 .upgrade-card {
+  background-color: #f8f9fa;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
   padding: 1rem;
-  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.upgrade-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.1);
+}
+
+.upgrade-card.locked {
+  opacity: 0.6;
 }
 
 .upgrade-card__body {
-  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .upgrade-card__icon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--border-radius-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
+  background-color: #e7f1ff;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.upgrade-card__content {
+  flex: 1;
+  min-width: 0;
 }
 
 .upgrade-card__title {
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+  color: #212529;
 }
 
 .upgrade-card__text {
-  color: #6c757d;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
 }
 
-.upgrade-card--final {
-  background-color: #fff8db;
-  border-color: #f7e29c;
+.upgrade-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
 }
 
 .upgradeButton {
   width: 100%;
+  padding: 0.6rem;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--border-radius-sm);
   font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upgradeButton:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.upgradeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+@media (max-width: 1199.98px) {
+  .algorithms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .final-stats .row {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 991.98px) {
-  .final-hero__button-wrap {
-    min-height: 300px;
+  .final-page__content {
+    padding: 1rem;
+  }
+
+  .final-hero {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .final-hero__heading {
+    font-size: 2rem;
+  }
+
+  .big-button {
+    width: 250px;
+    height: 250px;
+    font-size: 3rem;
+  }
+
+  .button-stats-display {
+    gap: 1rem;
+  }
+
+  .upgrade-tabs {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bulk-purchase-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .final-hero__heading {
+    font-size: 1.75rem;
+  }
+
+  .big-button {
+    width: 200px;
+    height: 200px;
+    font-size: 2.5rem;
+  }
+
+  .button-stats-display {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .final-stats .row {
+    grid-template-columns: 1fr;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-menu__item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stats-menu__value {
+    margin-top: 0.5rem;
+  }
+
+  .upgrade-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .bulk-purchase-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sidebar-panel {
+    padding: 1rem;
   }
 }

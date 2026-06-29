@@ -45,6 +45,11 @@
   <main class="flex-fill">
     <div class="container py-5 final-page__content">
       <div class="row g-4 align-items-stretch">
+
+        <!-- ================================================================ -->
+        <!-- MAIN CLICKER SECTION (Left Side - 8 columns)                     -->
+        <!-- Contains the main button, stats menu, and achievements            -->
+        <!-- ================================================================ -->
         <section class="col-lg-8">
           <div class="card final-hero shadow-sm">
             <div class="card-body final-hero__body">
@@ -53,44 +58,110 @@
                 <h1 class="h3 final-hero__heading">Build your code score</h1>
               </div>
 
+              <!-- BUTTON STATS DISPLAY (ABOVE BUTTON) -->
+              <div class="button-stats-display text-center mb-3">
+                <div class="button-stat">
+                  <span class="button-stat__label">Coded Lines:</span>
+                  <span id="totalLinesDisplay" class="button-stat__value">0</span>
+                </div>
+                <div class="button-stat">
+                  <span class="button-stat__label">Per Second:</span>
+                  <span id="perSecondDisplay" class="button-stat__value">0</span>
+                </div>
+              </div>
+
+              <!-- BIG CLICKABLE BUTTON -->
               <div class="final-hero__button-wrap d-flex justify-content-center mb-4">
                 <button type="button" id="bigButton" class="btn big-button" aria-label="Main click button">
                   <span class="big-button__icon">&lt;/&gt;</span>
                 </button>
               </div>
 
-              <div class="final-stats">
-                <div class="row g-3">
-                  <div class="col-sm-3">
-                    <div class="final-stat card">
-                      <div class="final-stat__label">Lines of Code</div>
-                      <div id="lineCount" class="final-stat__value">0</div>
+              <!-- COLLAPSIBLE STATS SECTION -->
+              <!-- Users can open/close this menu to view all game statistics -->
+              <!-- To add new stats: 
+                   1. Add new .stats-menu__item div with unique id
+                   2. Include Bootstrap icon in .stats-menu__label
+                   3. Create span with unique id for value display
+                   4. Update updateScore() in final.js to populate the value
+                   -->
+              <div class="stats-menu-wrapper">
+                <button type="button" class="btn btn-outline-primary stats-menu-toggle w-100 mb-2"
+                  data-bs-toggle="collapse" data-bs-target="#statsMenuPanel" aria-expanded="false"
+                  aria-controls="statsMenuPanel">
+                  <i class="bi bi-chevron-down stats-menu-toggle__icon"></i>
+                  View Stats
+                </button>
+                <div class="collapse" id="statsMenuPanel">
+                  <div class="stats-menu card">
+                    <div class="stats-menu__content">
+                      <!-- STAT: TOTAL LINES -->
+                      <div class="stats-menu__item">
+                        <span class="stats-menu__label">
+                          <i class="bi bi-file-text"></i> Total Lines of Code
+                        </span>
+                        <span id="lineCount" class="stats-menu__value">0</span>
+                      </div>
+
+                      <!-- STAT: LINES PER CLICK -->
+                      <div class="stats-menu__item">
+                        <span class="stats-menu__label">
+                          <i class="bi bi-cursor-fill"></i> Lines / Click
+                        </span>
+                        <span id="linesPerClick" class="stats-menu__value">0</span>
+                      </div>
+
+                      <!-- STAT: LINES PER SECOND -->
+                      <div class="stats-menu__item">
+                        <span class="stats-menu__label">
+                          <i class="bi bi-lightning-fill"></i> Lines / Second
+                        </span>
+                        <span id="linesPerSecond" class="stats-menu__value">0</span>
+                      </div>
+
+                      <!-- STAT: TOTAL CLICKS -->
+                      <div class="stats-menu__item">
+                        <span class="stats-menu__label">
+                          <i class="bi bi-hand-index"></i> Accumulated Lines of Code
+                        </span>
+                        <span id="totalClicks" class="stats-menu__value">0</span>
+                      </div>
+
+                      <!-- STAT: PLAYTIME -->
+                      <div class="stats-menu__item">
+                        <span class="stats-menu__label">
+                          <i class="bi bi-hourglass"></i> Play Time
+                        </span>
+                        <span id="playTime" class="stats-menu__value">0s</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-sm-3">
-                    <div class="final-stat card">
-                      <div class="final-stat__label">Lines / click</div>
-                      <div id="linesPerClick" class="final-stat__value">0</div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="final-stat card">
-                      <div class="final-stat__label">Lines / sec</div>
-                      <div id="linesPerSecond" class="final-stat__value">0</div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="final-stat card">
-                      <div class="final-stat__label">Total lines</div>
-                      <div id="totalLines" class="final-stat__value">0</div>
-                    </div>
-                  </div>
+                </div>
+              </div>
+
+              <!-- ACHIEVEMENTS SECTION -->
+              <!-- Easy-to-extend achievement system -->
+              <!-- To add new achievements:
+                   1. Add entry to achievementsList in final.js with id, title, description, icon, condition
+                   2. Styling will be applied automatically based on completion status
+                   3. Achievement classes: achievement-item (base), locked, completed
+                   -->
+              <div class="achievements-wrapper mt-4">
+                <h3 class="achievements-title">
+                  <i class="bi bi-trophy"></i> Achievements
+                </h3>
+                <div class="achievements-grid" id="achievementsContainer">
+                  <!-- Achievements will be generated by JavaScript -->
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        <!-- ================================================================ -->
+        <!-- UPGRADE & PRESTIGE PANEL (Right Side - 4 columns)               -->
+        <!-- Contains purchase multiplier, upgrade tabs, and prestige button  -->
+        <!-- ================================================================ -->
         <aside class="col-lg-4">
           <div class="upgrade-panel">
             <div class="upgrade-panel__header mb-3 d-flex align-items-center justify-content-between">
@@ -101,15 +172,21 @@
               <i class="bi bi-gear-fill upgrade-panel__icon"></i>
             </div>
 
+            <!-- Bulk Upgrade Buttons-->
             <div class="bulk-purchase-controls mb-3">
               <div class="btn-group w-100" role="group" aria-label="Bulk purchase multiplier">
-                <button type="button" class="btn btn-outline-primary active bulk-purchase-toggle" data-multiplier="1">1x</button>
-                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle" data-multiplier="10">10x</button>
-                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle" data-multiplier="100">100x</button>
-                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle" data-multiplier="max">MAX</button>
+                <button type="button" class="btn btn-outline-primary active bulk-purchase-toggle"
+                  data-multiplier="1">1x</button>
+                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle"
+                  data-multiplier="10">10x</button>
+                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle"
+                  data-multiplier="100">100x</button>
+                <button type="button" class="btn btn-outline-primary bulk-purchase-toggle"
+                  data-multiplier="max">MAX</button>
               </div>
             </div>
 
+            <!-- Upgrade Tabs -->
             <ul class="nav nav-tabs upgrade-tabs mb-3" role="tablist">
               <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="tab-languages" data-bs-toggle="tab"
@@ -134,7 +211,7 @@
             <div class="tab-content">
               <div class="tab-pane fade show active" id="tabPaneLanguages" role="tabpanel"
                 aria-labelledby="tab-languages">
-                <!-- Languages tab: current upgrade cards -->
+                <!-- Languages -->
                 <div class="upgrade-panel__scroll">
                   <div class="upgrade-list d-grid gap-3">
 
@@ -142,7 +219,7 @@
                     <article class="upgrade-card card">
                       <div class="upgrade-card__body d-flex align-items-start gap-3">
                         <div class="upgrade-card__icon bg-light text-primary">
-                          <i class="bi bi-arrow-up-right-circle"></i>
+                          <i class="bi bi-speedometer2"></i>
                         </div>
                         <div>
                           <h3 class="upgrade-card__title h6 mb-1">C</h3>
@@ -181,7 +258,8 @@
                           <p class="upgrade-card__text mb-0">+6 lines of code per click.</p>
                         </div>
                       </div>
-                      <button type="button" id="upgrade-three" class="btn btn-outline-primary upgradeButton">500</button>
+                      <button type="button" id="upgrade-three"
+                        class="btn btn-outline-primary upgradeButton">500</button>
                     </article>
 
                     <!-- Click Upgrade Card 4 -->
@@ -195,7 +273,8 @@
                           <p class="upgrade-card__text mb-0">+12 lines of code per click.</p>
                         </div>
                       </div>
-                      <button type="button" id="upgrade-four" class="btn btn-outline-primary upgradeButton">1000</button>
+                      <button type="button" id="upgrade-four"
+                        class="btn btn-outline-primary upgradeButton">1000</button>
                     </article>
 
                     <!-- Click Upgrade Card 5 -->
@@ -209,7 +288,8 @@
                           <p class="upgrade-card__text mb-0">+20 lines of code per click.</p>
                         </div>
                       </div>
-                      <button type="button" id="upgrade-five" class="btn btn-outline-primary upgradeButton">1750</button>
+                      <button type="button" id="upgrade-five"
+                        class="btn btn-outline-primary upgradeButton">1750</button>
                     </article>
 
                   </div>
@@ -217,7 +297,7 @@
               </div>
 
               <div class="tab-pane fade" id="tabPaneAlgorithms" role="tabpanel" aria-labelledby="tab-algorithms">
-                <!-- Algorithms tab: empty for now -->
+                <!-- Algorithms -->
                 <div class="upgrade-panel__scroll">
                   <div class="upgrade-list d-grid gap-3">
 
@@ -284,6 +364,7 @@
 
               <div class="tab-pane fade" id="tabPaneDataStructures" role="tabpanel"
                 aria-labelledby="tab-data-structures">
+                <!-- Data Structures -->
                 <div class="upgrade-panel__scroll">
                   <div class="upgrade-list d-grid gap-3">
 
@@ -295,7 +376,8 @@
                         </div>
                         <div>
                           <h3 class="upgrade-card__title h6 mb-1">Arrays</h3>
-                          <p class="upgrade-card__text mb-0">Raises all line increases to the power of 1.1</p>
+                          <p class="upgrade-card__text mb-0">Raises all line increases to the power of 1.1. Unlocks
+                            based on Accumulated Lines of Code</p>
                           <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
                             <small id="data-one-count" class="text-muted">Owned: 0</small>
                             <small id="data-one-value" class="text-muted">^0</small>
@@ -313,7 +395,8 @@
                         </div>
                         <div>
                           <h3 class="upgrade-card__title h6 mb-1">Linked Lists</h3>
-                          <p class="upgrade-card__text mb-0">Raise all clicking production to the power of 2</p>
+                          <p class="upgrade-card__text mb-0">Raise all clicking production to the power of 2. Unlocks
+                            based on Accumulated Lines of Code</p>
                           <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
                             <small id="data-two-count" class="text-muted">Owned: 0</small>
                             <small id="data-two-value" class="text-muted">^0</small>
@@ -331,7 +414,8 @@
                         </div>
                         <div>
                           <h3 class="upgrade-card__title h6 mb-1">Stack</h3>
-                          <p class="upgrade-card__text mb-0">Raise all Automatic production to the power of 2</p>
+                          <p class="upgrade-card__text mb-0">Raise all Automatic production to the power of 2. Unlocks
+                            based on Accumulated Lines of Code</p>
                           <div class="upgrade-card__meta d-flex justify-content-between align-items-center mt-2">
                             <small id="data-three-count" class="text-muted">Owned: 0</small>
                             <small id="data-three-value" class="text-muted">^0</small>
@@ -346,7 +430,7 @@
               </div>
 
               <div class="tab-pane fade" id="tabPaneFrameworks" role="tabpanel" aria-labelledby="tab-frameworks">
-                <!-- Frameworks-->
+                <!-- Frameworks -->
                 <div class="upgrade-panel__scroll">
                   <div class="upgrade-list d-grid gap-3">
 
@@ -410,8 +494,34 @@
                   </div>
                 </div>
               </div>
+
+              <!-- TODO: -->
+              <!-- ================================================================ -->
+              <!-- PRESTIGE PANEL                                                   -->
+              <!-- Permanent bonus system - allows resetting progress for rewards   -->
+              <!-- Currently no functionality implemented - button is placeholder   -->
+              <!-- ================================================================ -->
+              <div class="prestige-panel card shadow-sm mt-3">
+                <div class="card-body prestige-panel__body">
+                  <div class="prestige-content">
+                    <div class="prestige-content__icon">
+                      <i class="bi bi-arrow-clockwise"></i>
+                    </div>
+                    <h3 class="prestige-content__title">Prestige</h3>
+                    <p class="prestige-content__description">Reset your progress to gain powerful bonuses</p>
+                    <div class="prestige-content__knowledge">
+                      Code Knowledge: <strong id="codeKnowledge">0</strong>
+                    </div>
+                    <button type="button" class="prestige-button" aria-label="Prestige button">
+                      (Currently Does Nothing)
+                    </button>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
+
         </aside>
       </div>
     </div>
